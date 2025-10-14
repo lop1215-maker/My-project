@@ -11,12 +11,11 @@ struct Book{
 
 struct Book library[1000];
 int bookCount = 0;
-const char* filename = "books.txt";
 
 void clearInputBuffer()
 {
-    // int c;
-    // while ((c = getchar()) != '\n' && c != EOF);
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
 }
 
 void addBook()
@@ -27,11 +26,11 @@ void addBook()
         return;
     }
     printf("Введите название книги: \n");
-    // scanf(" %100[^\n]", library[bookCount].name);
-    // clearInputBuffer();
+    scanf(" %100[^\n]", library[bookCount].name);
+    clearInputBuffer();
 
     printf("Введите год прочтения: \n");
-    // while (scanf("%d", &library[bookCount].year) != 1)
+    while (scanf("%d", &library[bookCount].year) != 1)
     {
         printf("Ошибка, введите число: \n");
         clearInputBuffer();
@@ -49,21 +48,21 @@ void addBook()
         clearInputBuffer();
 
         bookCount++;
-        printf("Книга добавлена!\n\n");
+        printf("Книга добавлена!\n");
 }
 
 void showBooks()
 {
     if (bookCount == 0)
     {
-        printf("Библиотека пуста!\n\n");
+        printf("Библиотека пуста!\n");
         return;
     }
 
-    printf("\n=== Ваша библиотека ===\n");
+    printf("=== Ваша библиотека ===\n");
     for (int i = 0; i < bookCount; i ++)
     {
-        printf("%d. %s - %s (%d год прочтения) - оценка: %.1f\n",
+        printf("%d. %s - %s (%d год прочтения) - оценка: %f\n",
                i + 1,
                library[i].name,
                library[i].author,
@@ -76,11 +75,11 @@ void showStaticstics()
 {
     if (bookCount == 0)
     {
-        printf("Библиотека пуста! Нет данных для статистики.\n\n");
+        printf("Библиотека пуста! Нет данных для статистики.\n");
         return;
     }
 
-    printf("\n=== Статистика ===\n");
+    printf("=== Статистика ===\n");
 
     printf("Количество прочитанных книг: %d\n", bookCount);
 
@@ -163,7 +162,7 @@ int main()
                 printf("Выход из программы. \n");
                 return 0;
             default:
-                printf("Неверный выбор! Введите 1-4. \n\n");
+                printf("Неверный выбор! Введите 1-4. \n");
 
         } 
     }
