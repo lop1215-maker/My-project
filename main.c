@@ -70,7 +70,7 @@ void showBooks()
     }
 }
 
-void showStaticstics()
+void showStatistics()
 {
     if (bookCount == 0)
     {
@@ -155,7 +155,7 @@ int main()
                 showBooks();
                 break;
             case 3:
-                showStaticstics();
+                showStatistics();
                 break;
             case 4:
                 printf("Выход из программы. \n");
