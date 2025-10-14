@@ -103,7 +103,7 @@ void showStatistics()
 
     if (bestBookIndex != -1)
     {
-        printf("Самая высокооценнёная кнгиа: \n");
+        printf("Самая высокооценнёная книга: \n");
         printf(" %s - %s (оценка: %f)\n",
                library[bestBookIndex].name,
                library[bestBookIndex].author,
