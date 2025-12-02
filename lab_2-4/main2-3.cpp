@@ -57,18 +57,26 @@ float* filterAboveAverage(float* p, int n, int& newCount)
     float avg = average(p, n); /*Вычисляем среднее значение массива*/
     newCount = 0; /*Счётчик для подходящих чисел*/
     
-    float* newArray = new float[newCount]; /*Новый динамический массив для результатов*/
-    int index = 0; /*Индекс для нового массива*/
-
     for (int i = 0; i < n; i++) /*Цикл по всем элементам*/
     {
         if (*(p + i) > avg) /*Если текущий больше среднего*/
         {
             newCount++;
+        }
+    }
+    
+    float* newArray = new float[newCount]; /*Новый динамический массив для результатов*/
+    int index = 0; /*Индекс для нового массива*/
+    
+    for (int i = 0; i < n; i++)
+    {
+        if (*(p + i) > avg)
+        {
             *(newArray + index) = *(p + i);
             index++;
         }
     }
+    
     return newArray;
 }
 
