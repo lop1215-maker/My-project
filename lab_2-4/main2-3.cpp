@@ -1,72 +1,71 @@
-#include <iostream> /*Подкючаем библиотеку ввода/вывода*/
+#include <iostream> 
 
-using namespace std; /*Используем стандартное пространство имён*/
+using namespace std; 
 
-/*Функция для ввода данных в массив*/
 void inputData(float* p, int n) 
 {
-    cout << "Enter values: "; /*Выводим сообщение пользователю*/
-    for (int i = 0; i < n; i++) /*Цикл по всем элементам массива*/
+    cout << "Enter values: "; 
+    for (int i = 0; i < n; i++) 
     {
-        cin >> *(p + i); /*Читаем значение и сохраняем в массив через указатель*/
+        cin >> *(p + i); 
     }
 }
 
-/*Функция для вычисления среднего значения*/
+
 float average(const float* p, int n)
 {
-    float sum = 0; /*Переменная для хранения суммы всех элементов*/
-    for (int i = 0; i < n; i ++) /*Цикл по всем элементам массива*/
+    float sum = 0;
+    for (int i = 0; i < n; i ++)
     {
-        sum += *(p + i); /*Прибавляем текущий элемент к сумме*/
+        sum += *(p + i);
     }
-    return sum / n; /*Возвращаем среднее значение*/
+    return sum / n;
 }
 
-/*Функция для нахождения минимального элемента*/
+
 float minValue(const float* p, int n)
 {
-    float  minVal = *(p + 0); /*Предполагаем, что минимальный элемент - первый*/
-    for (int i = 1; i < n; i ++) /*Пропускаем первый элемент в массиве*/
+    float  minVal = *(p + 0); 
+    for (int i = 1; i < n; i ++) 
     {
-        if (*(p + i) < minVal) /*Сравниваем текущий элемент с минимальным*/
+        if (*(p + i) < minVal) 
         {
-            minVal = *(p + i); /*Обновляем минимальный*/
+            minVal = *(p + i); 
         }
     }
     return minVal;
 }
 
-/*Функция на нахождение максимального элемента*/
+
 float maxValue(const float* p, int n)
 {
-    float maxVal = *(p + 0); /*Предполагаем, что первый элемент - максимальный*/
-    for (int i = 1; i < n; i++) /*Пропускаем первый элемент в массиве*/
+    float maxVal = *(p + 0); 
+    for (int i = 1; i < n; i++) 
     {
-        if (*(p + i) > maxVal) /*Сравниваем текущий с максимальным*/
+        if (*(p + i) > maxVal) 
         {
-            maxVal = *(p + i); /*Обновляем максимальный элемент*/
+            maxVal = *(p + i); 
         }
     }
     return maxVal;
 }
 
-/*Функция для фильтраций значений выше среднего*/
+
 float* filterAboveAverage(float* p, int n, int& newCount)
 {
-    float avg = average(p, n); /*Вычисляем среднее значение массива*/
-    newCount = 0; /*Счётчик для подходящих чисел*/
+    float avg = average(p, n); 
+    newCount = 0; 
     
-    for (int i = 0; i < n; i++) /*Цикл по всем элементам*/
+    for (int i = 0; i < n; i++) 
     {
-        if (*(p + i) > avg) /*Если текущий больше среднего*/
+        if (*(p + i) > avg) 
         {
             newCount++;
         }
     }
     
-    float* newArray = new float[newCount]; /*Новый динамический массив для результатов*/
-    int index = 0; /*Индекс для нового массива*/
+    float* newArray = new float[newCount]; 
+    int index = 0; 
     
     for (int i = 0; i < n; i++)
     {
