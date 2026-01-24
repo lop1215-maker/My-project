@@ -18,6 +18,12 @@ vector<GroupInfo> groupStats(T1 arr[], int n,
                              TValue (*valueFunc)(T1)){
     vector<GroupInfo> groups;
 
+    for (int i = 0; i < n; i++)(
+        T1 elem = arr[i];
+        TKey key = keyFunc(elem);
+        TValue value = valueFunc(elem);
+    )
+
     return groups;
 }
 
