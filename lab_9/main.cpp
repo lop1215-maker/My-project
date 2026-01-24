@@ -61,6 +61,34 @@ vector<GroupInfo> groupStats(T1 arr[], int n,
     return groups;
 }
 
+int lastDigit(int x){
+    return x % 10;
+}
+
+int valueInt(int x){
+    return x;
+}
+
+int getInterval(double x){
+    if (x < 0) return 0;
+    if (x <= 10) return 1;
+    return 2;
+}
+
+double valueDouble(double x){
+    return x;
+}
+
+char firstLetter(string s){
+    return s[0];
+}
+
+int strLength(string s){
+    return (int)s.length();
+}
+
+
+
 int main(){
     return 0;
 }
