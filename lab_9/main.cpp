@@ -3,20 +3,21 @@
 #include <string>
 using namespace std;
 
+template<typename T>
 struct GroupInfo{
     int key;
     int count;
-    int minElem;
-    int maxElem;
+    T minElem;
+    T maxElem;
     double sum;
     double avg;
 };
 
 template<typename T1, typename TKey, typename TValue>
-vector<GroupInfo> groupStats(T1 arr[], int n,
+vector<GroupInfo<T1>> groupStats(T1 arr[], int n,
                              TKey (*keyFunc)(T1),
                              TValue (*valueFunc)(T1)){
-    vector<GroupInfo> groups;
+    vector<GroupInfo<T1>> groups;
 
     for (int i = 0; i < n; i++){
         T1 elem = arr[i];
@@ -32,7 +33,7 @@ vector<GroupInfo> groupStats(T1 arr[], int n,
         }
 
         if (groupIndex == -1){
-            GroupInfo g;
+            GroupInfo<T1> g;
             g.key = key;
             g.count = 1;
             g.minElem = elem;
@@ -109,6 +110,18 @@ int main(){
     for (auto g : res2){
         cout << g.key << ", " << g.count << ", "
         << g.minElem << ", " << g.maxElem << ", "
+        << g.sum << ", " << g.avg << endl;
+    }
+
+
+    cout << "\n=== string ===" << endl;
+    string arr3[] = {"apple", "apricot", "banana", "berry", "cherry"};
+    int n3 = 5;
+
+    auto res3 = groupStats(arr3, n3, firstLetter, strLength);
+    for (auto g : res3){
+        cout << g.key << ", " << g.count << ", "
+        << g.maxElem << ", " << g.maxElem << ", "
         << g.sum << ", " << g.avg << endl;
     }
 
