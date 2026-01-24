@@ -18,11 +18,34 @@ vector<GroupInfo> groupStats(T1 arr[], int n,
                              TValue (*valueFunc)(T1)){
     vector<GroupInfo> groups;
 
-    for (int i = 0; i < n; i++)(
+    for (int i = 0; i < n; i++){
         T1 elem = arr[i];
         TKey key = keyFunc(elem);
         TValue value = valueFunc(elem);
-    )
+        
+        int groupIndex = -1;
+        for (int j = 0; j < groups.size(); j++){
+            if (groups[j].key == key){
+                groupIndex = j;
+                break;
+            }
+        }
+
+        if (groupIndex == -1){
+            GroupInfo g;
+            g.key = key;
+            g.count = 1;
+            g.minElem = elem;
+            g.maxElem = elem;
+            g.sum = value;
+            g.avg = value;
+            groups.push_back(g);
+        }
+        else{
+            
+        }
+
+    }
 
     return groups;
 }
