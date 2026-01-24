@@ -90,6 +90,28 @@ int strLength(string s){
 
 
 int main(){
+    cout << "=== int ===" << endl;
+    int arr1[] = {15, 23, 25, 47, 52, 38, 61};
+    int n1 = 7;
+    
+    auto res1 = groupStats(arr1, n1, lastDigit, valueInt);
+    for (auto g : res1){
+        cout << g.key << ", " << g.count << ",  "
+        << g.minElem << ", " << g.maxElem << ", "
+        << g.sum << ", " << g.avg << endl;
+    }
+
+    cout << "\n=== double ===" << endl;
+    double arr2[] = {-5, 3, 12, 0, 8, 15, -2};
+    int n2 = 7;
+
+    auto res2 = groupStats(arr2, n2, getInterval, valueDouble);
+    for (auto g : res2){
+        cout << g.key << ", " << g.count << ", "
+        << g.minElem << ", " << g.maxElem << ", "
+        << g.sum << ", " << g.avg << endl;
+    }
+
     return 0;
 }
                              
