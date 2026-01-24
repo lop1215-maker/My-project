@@ -42,7 +42,18 @@ vector<GroupInfo> groupStats(T1 arr[], int n,
             groups.push_back(g);
         }
         else{
-            
+            groups[groupIndex].count++;
+
+            if (elem < groups[groupIndex].minElem){
+                groups[groupIndex].minElem = elem;
+            }
+            if (groups[groupIndex].maxElem < elem){
+                groups[groupIndex].maxElem = elem;
+            }
+
+            groups[groupIndex].sum += value;
+            groups[groupIndex].avg = 
+                groups[groupIndex].sum / groups[groupIndex].count;
         }
 
     }
