@@ -12,6 +12,19 @@ private:
 
 public:
     MyPipeline() {}
+
+    int size() const {
+        return (int)stepNames.size();
+    }
+
+    bool empty() const {
+        return stepNames.empty();
+    }
+
+    void clear() {
+        stepNames.clear();
+        stepFunctions.clear();
+    }
 };
 
 int main() {
