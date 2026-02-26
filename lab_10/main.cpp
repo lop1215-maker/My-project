@@ -25,6 +25,54 @@ public:
         stepNames.clear();
         stepFunctions.clear();
     }
+    
+    template <class F>
+void addStep(const std::string& name, F func) {
+    if (name.empty()) {
+        throw std::invalid_argument("step name is empty");
+    }
+
+    stepNames.push_back(name);
+    stepFunctions.push_back(func);
+}
+
+void removeStep(int index) {
+    if (index < 0 || index >= size()) {
+        throw std::out_of_range("index out of range");
+    }
+
+    stepNames.erase(stepNames.begin() + index);
+    stepFunctions.erase(stepFunctions.begin() + index);
+}
+
+T run(T value) const {
+    for (int i = 0; i < size(); i++) {
+        value = stepFunctions[i](value);
+    }
+    return value;
+}
+
+std::vector<T> trace(T value) const {
+    std::vector<T> result;
+
+    for (int i = 0; i < size(); i++) {
+        value = stepFunctions[i](value);
+        result.push_back(value);
+    }
+
+    return result;
+}
+
+friend std::ostream& operator<<(std::ostream& out, const MyPipeline<T>& pipeline) {
+    out << "Steps count: " << pipeline.size() << "\n";
+
+    for (int i = 0; i < pipeline.size(); i++) {
+        out << i << ") " << pipeline.stepNames[i] << "\n";
+    }
+
+    return out;
+}
+
 };
 
 int main() {
