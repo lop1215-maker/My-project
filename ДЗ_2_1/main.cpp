@@ -71,5 +71,25 @@ int main() {
         throw std::invalid_argument("Task count cannot be negative");
     }
 
+    TaskQueue queue;
+    std::vector<std::thread> workers;
+    workers.reserve(workerCount);
+
+    for (int i = 0; i < workerCount; ++i) {
+        workers.emplace_back(worker, std::ref(queue), i + 1);
+    }
+
+    for (int i = 1; i <= taskCount; ++i) {
+        queue.push(i);
+    }
+
+    queue.close();
+
+    for (std::thread& thread : workers) {
+        if (thread.joinable()) {
+            thread.join();
+        }
+    }
+
     return 0;
 }
