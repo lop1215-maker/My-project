@@ -49,6 +49,16 @@ private:
     bool closed_ = false;
 };
 
+void worker(TaskQueue& queue, int workerId) {
+    (void)workerId;
+
+    int task = 0;
+    while (queue.pop(task)) {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+}
+
+
 int main() {
     const int workerCount = 4;
     const int taskCount = 20;
