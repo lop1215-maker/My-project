@@ -6,6 +6,49 @@
 #include <thread>
 #include <vector>
 
+
+class TaskQueue {
+public:
+    void push(int task) {
+        std::unique_lock<std::mutex> lock(mutex_);
+
+        if (closed_) {
+            throw std::runtime_error("Cannot push a task into a closed queue");
+        }
+
+        tasks_.push(task);
+        condition_.notify_one();
+    }
+
+    bool pop(int& task) {
+        std::unique_lock<std::mutex> lock(mutex_);
+
+        condition_.wait(lock, [this]() {
+            return closed_ || !tasks_.empty();
+        });
+
+        if (tasks_.empty()) {
+            return false;
+        }
+
+        task = tasks_.front();
+        tasks_.pop();
+        return true;
+    }
+
+    void close() {
+        std::unique_lock<std::mutex> lock(mutex_);
+        closed_ = true;
+        condition_.notify_all();
+    }
+
+private:
+    std::queue<int> tasks_;
+    std::mutex mutex_;
+    std::condition_variable condition_;
+    bool closed_ = false;
+};
+
 int main() {
     const int workerCount = 4;
     const int taskCount = 20;
