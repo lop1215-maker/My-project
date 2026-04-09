@@ -1,3 +1,4 @@
+#include <iostream>
 #include <chrono>
 #include <condition_variable>
 #include <mutex>
@@ -49,12 +50,17 @@ private:
     bool closed_ = false;
 };
 
+std::mutex outputMutex;
+
 void worker(TaskQueue& queue, int workerId) {
-    (void)workerId;
 
     int task = 0;
+    
     while (queue.pop(task)) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
+
+        std::lock_guard<std::mutex> lock(outputMutex);
+        std::cout << "[Worker-" << workerId << "] processed task " << task << std::endl;
     }
 }
 
